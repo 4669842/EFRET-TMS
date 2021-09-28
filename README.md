@@ -4,6 +4,8 @@
 # Structure of Prokect
 This works with a master server running on a dedicated server to act as a gateway service for the TMS client.
 
+### Planned Features of TMS.
+
 ## TMS Server Features
 - ActiveDirectory Authentication
 - Permissions
@@ -13,5 +15,16 @@ This works with a master server running on a dedicated server to act as a gatewa
 = PVC Maps for Routing and planning
 - MailMerge Toolset
 - CMR Integration
-- Charging Order Creation
-- Dashboard
+- Charging Order Workflows Creation/Duplication
+- Movement Dashboard
+- Ferry Booking Workflow
+- Trailer Dashboard
+- Dynamic Quotation System.
+- Company Details Overview
+- Company Creation
+- Reporting
+- CO Invoicing
+- Purchase Report
+- Ferry Reporrt
+- Sale Report 
+- Ferry Sale Report
