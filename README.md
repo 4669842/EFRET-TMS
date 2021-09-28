@@ -10,6 +10,9 @@ This works with a master server running on a dedicated server to act as a gatewa
 - ActiveDirectory Authentication
 - Permissions
 - Update service
+- Lane Management
+- Corridor Management
+- Amazon Relay / Project44 API Integration.
 
 ## TMS Client
 = PVC Maps for Routing and planning
