@@ -141,7 +141,8 @@ namespace TMS_Server
                     // for each player...
                     foreach (NetConnection player in server.Connections)
                     {
-      
+                        Send(player, "test");
+  
                         // ... send information about every other player (actually including self)
                         foreach (NetConnection otherPlayer in server.Connections)
                         {
@@ -166,7 +167,6 @@ namespace TMS_Server
                         }
 
                         if (Stuff != null)
-                            //Send(player, "msg=shoot;client=1;vel=303.2;rotation=40");
                             Send(player, SerializeData(Stuff));
                     }
 
@@ -186,18 +186,7 @@ namespace TMS_Server
 
             server.SendMessage(sendMsg, recipient, NetDeliveryMethod.ReliableUnordered);
         }
-        public void GotMessage(object peer)
-        {
-            NetIncomingMessage im;
-            var server = (NetServer)peer;
-            while ((im = server.ReadMessage()) != null)
-            {
-                byte[] data = im.ReadBytes(im.LengthBytes);
-                NetOutgoingMessage sendMsg = server.CreateMessage(data.Length);
-                sendMsg.Write(data);
-                server.SendMessage(sendMsg, im.SenderConnection, NetDeliveryMethod.ReliableOrdered);
-            }
-        }
+ 
 
         public static string SerializeData(Dictionary<string, string> data)
         {
