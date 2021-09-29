@@ -25,22 +25,7 @@ namespace TMS_Server
             Thread serverthread = new Thread(StartServer);
             serverthread.Start();
 
-            /*
-             * 
-             * 
-             */
             bool startServer = true;
-            int ScreenConfiguration = 2;
-
-            if (args.Length > 0)
-            {
-                if (args[0] == "1" || args[0] == "3")
-                {
-                    startServer = false;
-                    ScreenConfiguration = Convert.ToInt32(args[0]);
-                }
-            }
-
             if (startServer)
             {
                 //Create Thread
@@ -134,14 +119,7 @@ namespace TMS_Server
                 server.Recycle(message);
             }
             Thread.Sleep(1);
-        }
-        static void game_Exiting(object sender, EventArgs e)
-        {
-            if (workerObject != null)
-            {
-                workerObject.RequestStop();
-                workerThread.Abort();
-            }
+            AcceptConsoleInput();
         }
     }
 }

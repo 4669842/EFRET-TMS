@@ -23,6 +23,7 @@ namespace TMS_Server
             config = new NetPeerConfiguration("EFRET");
             config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
             config.EnableMessageType(NetIncomingMessageType.Data);
+            config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
             config.Port = 14242;
             server = new NetServer(config);
             server.Start();
@@ -35,13 +36,8 @@ namespace TMS_Server
                 Console.WriteLine("Server not started...");
             }
             nextSendUpdates = NetTime.Now;
-
-            //recipient = new NetConnection();
-            //netpeer = new NetPeer(config);
-
-            //recipient = new NetConnection();
-
-            //recipient.Peer.DiscoverLocalPeers(config.Port);
+            netpeer = new NetPeer(config);
+            recipient.Peer.DiscoverLocalPeers(config.Port);
         }
 
         public void Receive()
@@ -76,7 +72,7 @@ namespace TMS_Server
                         Console.WriteLine(msg.SenderConnection.Status);
                         if (msg.SenderConnection.Status == NetConnectionStatus.Connected)
                         {
-                            Console.WriteLine($"{msg.SenderConnection.Peer.Configuration.LocalAddress} has connected.");
+                            Console.WriteLine($"{msg.SenderConnection.Peer.Configuration.BroadcastAddress} has connected.");
                         }
                         if (msg.SenderConnection.Status == NetConnectionStatus.Disconnected)
                         {
@@ -101,14 +97,7 @@ namespace TMS_Server
                             Console.WriteLine("** Server Connect Count: "+server.ConnectionsCount+ " **");
                             Console.WriteLine("** Server Status: "+server.Status + " **");
                             Console.WriteLine("*******************************************");
-   
-                            // randomize his position and store in connection tag
-                            /*
-                            msg.SenderConnection.Tag = new int[] {
-									NetRandom.Instance.Next(10, 100),
-									NetRandom.Instance.Next(10, 100)
-								};
-                            */
+  
                         }
 
                         break;
@@ -146,23 +135,6 @@ namespace TMS_Server
                         // ... send information about every other player (actually including self)
                         foreach (NetConnection otherPlayer in server.Connections)
                         {
-                            /*
-                            // send position update about 'otherPlayer' to 'player'
-                            NetOutgoingMessage om = server.CreateMessage();
-
-                            // write who this position is for
-                            om.Write(otherPlayer.RemoteUniqueIdentifier);
-
-                            if (otherPlayer.Tag == null)
-                                otherPlayer.Tag = new int[2];
-
-                            int[] pos = otherPlayer.Tag as int[];
-                            om.Write(pos[0]);
-                            om.Write(pos[1]);
-
-                            // send message
-                            server.SendMessage(om, player, NetDeliveryMethod.Unreliable);
-                            */
 
                         }
 
